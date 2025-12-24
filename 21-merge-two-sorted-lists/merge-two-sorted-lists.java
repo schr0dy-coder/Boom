@@ -25,15 +25,11 @@ class Solution {
             temp.next = new ListNode(value);
             temp = temp.next;   
         }
-        while(list1!=null){
-            temp.next = new ListNode(list1.val);
-            list1 = list1.next;
-            temp = temp.next;
+        if(list1 == null){
+            temp.next = list2;
         }
-        while(list2!=null){
-            temp.next = new ListNode(list2.val);
-            list2 = list2.next;
-            temp = temp.next;
+        else{
+            temp.next = list1;
         }
         return ans.next;
     }
