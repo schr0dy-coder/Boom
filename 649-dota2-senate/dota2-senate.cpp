@@ -1,20 +1,17 @@
 class Solution {
 public:
-    bool removeSenator(string& senate, char ch, int idx) {
-        bool checkRemove = false;
+    void removeSenator(string& senate, char ch, int idx) {
         while (true) {
-            if (idx == 0)
-                checkRemove = true;
             if (senate[idx] == ch) {
-                senate.erase(begin(senate) + idx);
+                senate[idx] = 'O';
                 break;
             }
             idx = (idx + 1) % senate.length();
         }
-        return checkRemove;
     }
+    int n;
     string predictPartyVictory(string senate) {
-        char s = senate[0];
+        n = senate.length();
         int r_count = 0;
         int d_count = 0;
 
@@ -27,19 +24,13 @@ public:
         int idx = 0;
         while (r_count > 0 && d_count > 0) {
             if (senate[idx] == 'R') {
-                bool checkRemoval =
-                    removeSenator(senate, 'D', (idx + 1) % (senate.length()));
+                removeSenator(senate, 'D', (idx + 1) % (senate.length()));
                 d_count--;
-                if (checkRemoval)
-                    idx--;
             }
 
-            else {
-                bool checkRemoval =
-                    removeSenator(senate, 'R', (idx + 1) % (senate.length()));
+            else if(senate[idx] == 'D') {
+                removeSenator(senate, 'R', (idx + 1) % (senate.length()));
                 r_count--;
-                if (checkRemoval)
-                    idx--;
             }
             idx = (idx + 1) % senate.length();
         }
