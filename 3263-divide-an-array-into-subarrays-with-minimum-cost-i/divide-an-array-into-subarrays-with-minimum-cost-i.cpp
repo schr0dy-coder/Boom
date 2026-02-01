@@ -1,9 +1,9 @@
 class Solution {
 public:
     int minimumCost(vector<int>& nums) {
-        long long sum = nums[0];
+        int sum = nums[0];
         int min_idx = -1;
-        long long min_value = INT_MAX;
+        int min_value = INT_MAX;
         for(int i = 1; i<nums.size(); i++){
             if(nums[i] < min_value){
                 min_value = nums[i];
@@ -20,6 +20,6 @@ public:
             }
         }
         sum+=min_value;
-        return (int)sum;
+        return sum;
     }
 };
