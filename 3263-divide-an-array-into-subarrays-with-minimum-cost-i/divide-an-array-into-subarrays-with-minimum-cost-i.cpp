@@ -1,25 +1,13 @@
 class Solution {
 public:
     int minimumCost(vector<int>& nums) {
-        int sum = nums[0];
-        int min_idx = -1;
-        int min_value = INT_MAX;
-        for(int i = 1; i<nums.size(); i++){
-            if(nums[i] < min_value){
-                min_value = nums[i];
-                min_idx = i;
+        int a = 51, b = 51, n = nums.size();
+        for(int i = 1; i < n; i++){
+            if(nums[i] < b){
+                b = nums[i];
+                if(b < a) swap(a, b);
             }
         }
-        sum+=min_value;
-        min_value= INT_MAX;
-        for(int i = 1; i<nums.size(); i++){
-            if(i!=min_idx){
-                if(nums[i] < min_value){
-                    min_value = nums[i];
-                }
-            }
-        }
-        sum+=min_value;
-        return sum;
+        return a + b + nums[0];
     }
 };
