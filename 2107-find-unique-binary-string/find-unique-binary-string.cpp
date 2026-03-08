@@ -1,31 +1,18 @@
 class Solution {
 public:
-    int n;
-    unordered_set<string> numsSet;
-    
-    string generate(string curr) {
-        if (curr.size() == n) {
-            if (numsSet.find(curr) == numsSet.end()) {
-                return curr;
-            }
-            
-            return "";
-        }
-        
-        string addZero = generate(curr + "0");
-        if (addZero.size() > 0) {
-            return addZero;
-        }
-        
-        return generate(curr + "1");
-    }
-    
     string findDifferentBinaryString(vector<string>& nums) {
-        n = nums.size();
-        for (string s : nums) {
-            numsSet.insert(s);
+        unordered_set<int> integers;
+        for (string num : nums) {
+            integers.insert(stoi(num, 0, 2));
         }
         
-        return generate("");
+        int ans = stoi(nums[0], 0, 2);
+        int n = nums.size();
+        
+        while (integers.find(ans) != integers.end()) {
+            ans = rand() % (int) pow(2, n);
+        }
+        
+        return bitset<16>(ans).to_string().substr(16 - n);
     }
 };
